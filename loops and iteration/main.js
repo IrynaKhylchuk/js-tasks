@@ -190,4 +190,4 @@
 //     }
 // }
 
-// result.length > 1 ? alert(`${number} is prime.`) : alert(`${number} is not prime.`);
+// result.length === 0 ? alert(`${number} is prime.`) : alert(`${number} is not prime.`);

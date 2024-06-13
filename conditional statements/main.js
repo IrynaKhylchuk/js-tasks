@@ -128,17 +128,17 @@
 
 // switch (sign) {
 //     case "+":
-//         alert("Sum of numbers: " + first_number + second_number)
+//         alert("Sum of numbers: " + (first_number + second_number))
 //         break;
 //     case "-":
-//         alert("Difference of numbers: " + first_number - second_number)
+//         alert("Difference of numbers: " + (first_number - second_number))
 //         break;
 //     case "*":
-//         alert("Product of numbers: " + first_number * second_number)
+//         alert("Product of numbers: " + (first_number * second_number))
 //         break;
 //     case "/":
 //         if (second_number !== 0) {
-//             alert("Division of numbers: " + first_number / second_number);
+//             alert("Division of numbers: " + (first_number / second_number));
 //         } else {
 //             alert("Error: Division by zero.");
 //         }
