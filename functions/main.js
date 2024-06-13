@@ -151,3 +151,10 @@ function getNextDay(day, month, year) {
 }
 
 getNextDay(4, 5, 2023);
+
+
+function isLeapYear(year) {
+    console.log(new Date(year, 1, 29).getMonth() === 1);
+}
+
+isLeapYear(2024);
