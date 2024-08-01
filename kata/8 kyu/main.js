@@ -167,7 +167,7 @@ function sumArray(array) {
   return array.reduce((acc, num) => acc + num, 0) - max - min;
 }
 
-export function points(games) {
+function points(games) {
   let totalPoints = 0;
 
   games.forEach((match) => {
@@ -184,3 +184,53 @@ export function points(games) {
 
   return totalPoints;
 }
+
+//? All Star Code Challenge #18
+
+function strCount(str, letter) {
+  return str.split("").filter((l) => l === letter).length;
+  //str.split(letter).length-1
+}
+
+//? Is this my tail?
+
+function correctTail(body, tail) {
+  return body.endsWith(tail);
+}
+
+//? Is this my tail?
+
+// const correctTail = (x, y) => x.endsWith(y);
+
+//?
+function howManyDalmatians(number) {
+  const dogs = [
+    "Hardly any",
+    "More than a handful!",
+    "Woah that's a lot of dogs!",
+    "101 DALMATIONS!!!",
+  ];
+
+  if (number <= 10) {
+    return dogs[0];
+  } else if (number <= 50) {
+    return dogs[1];
+  } else if (number < 101) {
+    return dogs[2];
+  } else if (number === 101) {
+    return dogs[3];
+  }
+}
+const quarterOf = (month) => {
+  if (1 <= month <= 3) {
+    return 1;
+  } else if (4 <= month <= 6) {
+    return 2;
+  } else if (7 <= month <= 9) {
+    return 3;
+  } else if (10 <= month <= 12) {
+    return 4;
+  } else {
+    throw new Error("Month must be between 1 and 12");
+  }
+};
