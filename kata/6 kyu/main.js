@@ -457,7 +457,7 @@ function getWeekDay(date) {
   return days[date.getDay()];
 }
 
-console.log(date);
+// console.log(date);
 
 //? Європейські країни мають дні тижня, що починаються з понеділка (№ 1), потім вівторок (№ 2) та до неділі (№ 7). Напишіть функцію getLocalDay(date), що повертає “європейський” день тижня для date.
 
@@ -473,7 +473,7 @@ function getLocalDay(date) {
   return day;
 }
 
-console.log(getLocalDay(date));
+// console.log(getLocalDay(date));
 
 //? Створіть функцію getDateAgo(date, days), щоб повернути день місяця, який був days днів після date.
 
@@ -486,7 +486,7 @@ function getDateAgo(date, days) {
   return dateCopy.getDate();
 }
 
-console.log(getDateAgo(date, 185));
+// console.log(getDateAgo(date, 185));
 
 //? Напишіть функцію getLastDayOfMonth(year, month), що повертає останній день місяця. Іноді це 30-е, 31-ше або навіть 28/29-е для лютого.
 
@@ -494,7 +494,7 @@ function getLastDayOfMonth(year, month) {
   return new Date(year, month + 1, 0).getDate();
 }
 
-console.log(getLastDayOfMonth(2012, 1));
+// console.log(getLastDayOfMonth(2012, 1));
 
 //? Напишіть функцію getSecondsToday(), що повертає кількість секунд з початку сьогоднішнього дня.
 
@@ -509,7 +509,7 @@ function getSecondsToday() {
   // return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
 }
 
-console.log(getSecondsToday());
+// console.log(getSecondsToday());
 
 //? Створіть функцію getSecondsToTomorrow(), що повертає кількість секунд до завтра.
 
@@ -527,7 +527,7 @@ function getSecondsToTomorrow() {
   // return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
 }
 
-console.log(getSecondsToTomorrow());
+// console.log(getSecondsToTomorrow());
 
 //? Напишіть функцію formatDate(date), яка повинна форматувати date наступним чином:
 
@@ -559,4 +559,470 @@ function formatDate(date) {
   }
 }
 
-console.log(formatDate(new Date(new Date() - 86400 * 1000)));
+// console.log(formatDate(new Date(new Date() - 86400 * 1000)));
+
+//? Перетворіть user на JSON, після цього зробіть з нього знову об’єкт і запишіть його в іншу змінну.
+
+user = {
+  name: "Іван Іванов",
+  age: 35,
+};
+
+let stringifyUser = JSON.stringify(user);
+let parseUser = JSON.parse(stringifyUser);
+
+// console.log(stringifyUser);
+// console.log(parseUser);
+
+//? Напишіть функцію replacer, щоб серіалізувати все, але видалити властивості, які посилаються на meetup.
+
+let room = {
+  number: 23,
+};
+
+let meetup = {
+  title: "Конференція",
+  occupiedBy: [{ name: "Іван" }, { name: "Аліса" }],
+  place: room,
+};
+
+room.occupiedBy = meetup;
+meetup.self = meetup;
+
+// console.log(
+//   JSON.stringify(meetup, function replacer(key, value) {
+//     return key !== "" && value === meetup ? undefined : value;
+//   })
+// );
+
+//? Напишіть функцію sumTo(n), що обчислює суму чисел 1 + 2 + ... + n.
+//? Зробити 3 варіанти рішення:
+
+//? Використання циклу.
+
+function sumToCycle(number) {
+  let sum = 0;
+  for (let i = 1; i <= number; i++) {
+    sum += i;
+  }
+  return sum;
+}
+
+// console.log(sumToCycle(4));
+
+//? Використання рекурсії, у випадку sumTo(n) = n + sumTo(n-1) для n > 1.
+
+function sumToRecursion(number) {
+  return number === 1 ? 1 : number + sumToRecursion(number - 1);
+}
+
+// console.log(sumToRecursion(4));
+
+//? Використання формули арифметичної прогресії.
+
+function sumToArithmeticProgression(number) {
+  return (number * (number + 1)) / 2;
+}
+
+// console.log(sumToArithmeticProgression(4));
+
+//? Розрахувати факторіал
+
+function factorial(number) {
+  return number === 1 ? 1 : number * factorial(number - 1);
+}
+
+// console.log(factorial(4));
+
+//? Числа Фібоначчі
+
+function fib(n) {
+  // return n <= 1 ? n : fib(n - 1) + fib(n - 2); <- bad solution for large numbers
+
+  let a = 1;
+  let b = 1;
+
+  for (let i = 3; i <= n; i++) {
+    let c = a + b;
+
+    a = b;
+    b = c;
+  }
+
+  return b;
+}
+
+// console.log(fib(4));
+
+//? Вивести одинозв’язаний список
+
+let list = {
+  value: 1,
+  next: {
+    value: 2,
+    next: {
+      value: 3,
+      next: {
+        value: 4,
+        next: null,
+      },
+    },
+  },
+};
+
+function printList(list) {
+  //cycle
+  // let template = list;
+
+  // while (template) {
+  //   console.log(template.value);
+  //   template = template.next;
+  // }
+
+  //recursion
+  console.log(list.value);
+
+  if (list.next) {
+    printList(list.next);
+  }
+}
+
+// printList(list);
+
+//? Вивести одинозв’язаний список у зворотному порядку
+
+function printReverseList(list) {
+  //recursion
+  // if (list.next) {
+  //   printReverseList(list.next);
+  // }
+
+  // console.log(list.value);
+
+  //cycle
+  let arr = [];
+  let template = list;
+
+  while (template) {
+    arr.push(template.value);
+    template = template.next;
+  }
+
+  arr.toString();
+
+  console.log(arr.toString());
+}
+
+// printReverseList(list);
+
+function makeCounter() {
+  let count = 0;
+
+  return function () {
+    return count++;
+  };
+}
+
+let counter = makeCounter();
+
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+
+//? є вбудований для масивів метод arr.filter(f). Він фільтрує всі елементи через функцію f. Якщо вона повертає true, цей елемент повертається в отриманому масиві.
+//? Зробіть набір “готових до використання” фільтрів:
+//? inBetween(a, b) – фільтрує елементи які більше a та менше b. Також має включати елементи, які дорівнюють їм.
+//? inArray([...]) – фільтрує елементи, які включено у заданий масив.
+
+arr = [1, 2, 3, 4, 5, 6, 7];
+
+function inBetween(a, b) {
+  return function (x) {
+    return x >= a && x <= b;
+  };
+}
+
+// console.log(arr.filter(inBetween(3, 6)));
+
+function inArray(arr) {
+  return function (x) {
+    return arr.includes(x);
+  };
+}
+
+// console.log(arr.filter(inArray([1, 2, 10])));
+
+//? Сортувати за полем
+
+users = [
+  { name: "Іван", age: 20, surname: "Іванов" },
+  { name: "Петро", age: 18, surname: "Петров" },
+  { name: "Енн", age: 19, surname: "Гетевей" },
+];
+
+function byField(fieldName) {
+  return (a, b) => (a[fieldName] > b[fieldName] ? 1 : -1);
+}
+
+// console.log(users.sort(byField('name')));
+// console.log(users.sort(byField('age')));
+
+//? Армія функцій
+
+function makeArmy() {
+  let shooters = [];
+
+  for (let i = 0; i < 10; i++) {
+    let shooter = function () {
+      console.log(i);
+    };
+    shooters.push(shooter);
+  }
+
+  return shooters;
+}
+
+let army = makeArmy();
+
+// army[0]();
+// army[1]();
+// army[2]();
+
+//? Напишіть функцію sum яка працює ось так: sum(a)(b) = a+b.
+
+function sum(a) {
+  return function (b) {
+    return a + b;
+  };
+}
+
+// console.log(sum(1)(2));
+
+//? Напишіть функцію makeCounter(), щоб лічильник міг зменшити та встановити рахунок:
+//? counter() повинен повернути наступний рахунок (як раніше).
+//? counter.set(value) повинен встановити лічильник в значення value.
+//? counter.decrease() повинен зменшити лічильник на 1.
+
+function makeCounter() {
+  let count = 0;
+
+  function counter() {
+    return count++;
+  }
+
+  counter.set = (value) => (count = value);
+  counter.decrease = () => count--;
+
+  return counter;
+}
+
+counter = makeCounter();
+
+// console.log(counter());
+// console.log(counter());
+
+counter.set(10);
+
+// console.log(counter());
+
+counter.decrease();
+
+// console.log(counter());
+
+//? Напишіть функцію sum, яка б працювала так:
+//? sum(1)(2) == 3; // 1 + 2
+//? sum(1)(2)(3) == 6; // 1 + 2 + 3
+//? sum(5)(-1)(2) == 6
+//? sum(6)(-1)(-2)(-3) == 0
+//? sum(0)(1)(2)(3)(4)(5) == 15
+
+function sum(a) {
+  let currentSum = a;
+
+  function f(b) {
+    currentSum += b;
+    return f;
+  }
+
+  f.toString = function () {
+    return currentSum;
+  };
+
+  return f;
+}
+
+// alert(sum(0)(1)(2)(3)(4)(5));
+
+//?
+let f = function () {
+  console.log(1);
+};
+
+let execute = function (f) {
+  setTimeout(f, 1000);
+};
+
+// execute(f);
+
+f = function () {
+  console.log(2);
+};
+
+// execute(f);
+
+//?
+const first = [1, 2, 3, 4];
+const second = [3, 4, 5, 6];
+
+function intersection(a, b) {
+  return;
+}
+
+user = {
+  name: "John",
+  surname: "Smith",
+
+  set fullName(value) {
+    [this.name, this.surname] = value.split(" ");
+  },
+
+  get fullName() {
+    return `${this.name} ${this.surname}`;
+  },
+};
+
+let admin = {
+  __proto__: user,
+  isAdmin: true,
+};
+
+// console.log(admin.fullName); // John Smith (*)
+
+// відпрацьовує setter
+admin.fullName = "Alice Cooper"; // (**)
+
+// console.log(admin.fullName); // Alice Cooper, стан об’єкта admin було змінено
+// console.log(user.fullName);
+
+// console.log(admin);
+// console.log(user);
+
+let hamster = {
+  stomach: [],
+
+  eat(food) {
+    this.stomach.push(food);
+  },
+};
+
+let speedy = {
+  __proto__: hamster,
+  stomach: [],
+};
+
+let lazy = {
+  __proto__: hamster,
+  stomach: [],
+};
+
+// Цей хом’ячок знайшов їжу
+speedy.eat("apple");
+speedy.eat("banana");
+// console.log(speedy.stomach);
+
+// Але цей також має їжу, чому? Виправте це.
+// console.log(lazy.stomach); // apple
+
+// console.log(speedy);
+// console.log(lazy);
+
+// function Rabbit(name) {
+//   this.name = name;
+//   console.log(name);
+// }
+
+// let rabbit = new Rabbit("White Rabbit");
+
+// let rabbit2 = new rabbit.constructor("Black Rabbit");
+
+// function Rabbit() {}
+// Rabbit.prototype = {
+//   eats: true
+// };
+
+// let rabbit = new Rabbit();
+
+// Rabbit.prototype.eats = false;
+
+// console.log( rabbit.eats );
+
+// function Rabbit() {}
+// Rabbit.prototype = {
+//   eats: true,
+// };
+
+// let rabbit = new Rabbit();
+
+// delete rabbit.eats;
+
+// console.log(rabbit);
+
+// let a = { 1: 1, 2: 2 };
+// let b = a;
+
+// a[1] = 0
+// delete b[1]
+
+// console.log(a);
+// console.log(b);
+// a = null;
+// let c = a;
+// console.log(a);
+// console.log(b);
+// console.log(c);
+
+function Rabbit() {}
+Rabbit.prototype = {
+  eats: true,
+};
+
+let rabbit = new Rabbit();
+
+Rabbit.prototype = {};
+
+// console.log( rabbit.eats );
+
+function Rabbit1() {}
+Rabbit1.prototype = {
+  eats: true,
+};
+
+let rabbit1 = new Rabbit1();
+
+Rabbit1.prototype.eats = false;
+
+// console.log( rabbit1.eats );
+
+// console.log(rabbit);
+// console.log(rabbit1);
+
+// ?
+
+arr = [1, 2, 2, 3, 3, 3, 4, 3, 3, 3, 2, 2, 1];
+
+function findOdd(arr) {
+  return arr.reduce((a, b) => a ^ b);
+}
+
+console.log(findOdd(arr));
+
+
+function add(arr) {
+  return arr.reduce((a, b) => a * b, 1);
+}
+
+function multi(arr) {
+  return arr.reduce((a, b) => a + b, 0);
+}
+
+console.log(multi([5, 1, 5]));
